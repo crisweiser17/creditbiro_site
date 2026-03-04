@@ -5,7 +5,6 @@ include 'includes/header.php';
 // Raw data for plans to allow calculations
 $raw_plans = [
     ["name" => "Trial", "price" => 0, "credits" => 20, "highlight" => false, "custom" => true],
-    ["name" => "Light", "price" => 147, "credits" => 40, "highlight" => false],
     ["name" => "Starter", "price" => 297, "credits" => 100, "highlight" => true],
     ["name" => "Growth", "price" => 597, "credits" => 250, "highlight" => true],
     ["name" => "Business", "price" => 1297, "credits" => 600, "highlight" => true],
