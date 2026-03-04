@@ -1,0 +1,35 @@
+name: Deploy to Cloudways
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build Site
+      run: npm run build
+
+    - name: Deploy to Cloudways via SFTP
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        username: ${{ secrets.CLOUDWAYS_USERNAME }}
+        server: ${{ secrets.CLOUDWAYS_HOST }}
+        port: 22 
+        ssh_private_key: ${{ secrets.CLOUDWAYS_SSH_KEY }}
+        local_path: './dist/*'
+        remote_path: '/public_html'
+        args: '-o ConnectTimeout=5'
