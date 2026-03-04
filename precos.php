@@ -9,8 +9,7 @@ $raw_plans = [
     ["name" => "Starter", "price" => 297, "credits" => 100, "highlight" => true],
     ["name" => "Growth", "price" => 597, "credits" => 250, "highlight" => true],
     ["name" => "Business", "price" => 1297, "credits" => 600, "highlight" => true],
-    ["name" => "Professional", "price" => 2497, "credits" => 1400, "highlight" => false],
-    ["name" => "Enterprise", "price" => 4997, "credits" => 3250, "highlight" => false],
+    ["name" => "Enterprise", "price" => 2497, "credits" => 1400, "highlight" => false],
 ];
 
 // Helper to format currency
