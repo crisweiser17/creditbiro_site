@@ -5,7 +5,6 @@ include 'includes/header.php';
 // Raw data for plans to allow calculations
 $raw_plans = [
     ["name" => "Trial", "price" => 0, "credits" => 20, "highlight" => false, "custom" => true],
-    ["name" => "Pay As You Go", "price" => 0, "credits" => 0, "highlight" => false, "custom" => true],
     ["name" => "Light", "price" => 147, "credits" => 40, "highlight" => false],
     ["name" => "Starter", "price" => 297, "credits" => 100, "highlight" => true],
     ["name" => "Growth", "price" => 597, "credits" => 250, "highlight" => true],
@@ -38,12 +37,6 @@ $plans = array_map(function($plan) {
     if ($plan['name'] === 'Trial') {
         $plan['display_credits'] = "20 (único)";
         $plan['cost_per_credit'] = "Grátis";
-        $plan['additional_credit_cost'] = "-";
-    }
-    
-    if ($plan['name'] === 'Pay As You Go') {
-        $plan['display_credits'] = "Sob demanda";
-        $plan['cost_per_credit'] = "R$ 4,50";
         $plan['additional_credit_cost'] = "-";
     }
 
