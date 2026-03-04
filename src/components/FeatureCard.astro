@@ -1,5 +1,5 @@
 ---
-import { CheckCircle, Search, FileText, AlertTriangle, Globe, MapPin, Gavel } from 'lucide-react';
+import { CheckCircle, Search, FileText, AlertTriangle, Globe, MapPin, Gavel, Shield } from 'lucide-react';
 
 interface Props {
   title: string;
@@ -17,7 +17,8 @@ const IconMap = {
   'globe': Globe,
   'map-pin': MapPin,
   'gavel': Gavel,
-  'check-circle': CheckCircle
+  'check-circle': CheckCircle,
+  'shield': Shield
 };
 
 const IconComponent = IconMap[icon] || CheckCircle;
