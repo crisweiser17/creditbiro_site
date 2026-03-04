@@ -1,6 +1,7 @@
----
-const currentYear = new Date().getFullYear();
----
+<?php
+$currentYear = date('Y');
+?>
+</main>
 
 <footer class="bg-slate-900 text-slate-300 py-12">
   <div class="container mx-auto px-4">
@@ -25,8 +26,8 @@ const currentYear = new Date().getFullYear();
       <div>
         <h4 class="text-white font-bold mb-4">Empresa</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="/precos" class="hover:text-white">Planos e Preços</a></li>
-          <li><a href="/contato" class="hover:text-white">Fale Conosco</a></li>
+          <li><a href="/precos.php" class="hover:text-white">Planos e Preços</a></li>
+          <li><a href="/contato.php" class="hover:text-white">Fale Conosco</a></li>
           <li><a href="#" class="hover:text-white">Termos de Uso</a></li>
           <li><a href="#" class="hover:text-white">Privacidade</a></li>
         </ul>
@@ -42,7 +43,14 @@ const currentYear = new Date().getFullYear();
     </div>
     
     <div class="border-t border-slate-800 pt-8 text-center text-sm">
-      <p>&copy; {currentYear} CreditBiro. Todos os direitos reservados.</p>
+      <p>&copy; <?php echo $currentYear; ?> CreditBiro. Todos os direitos reservados.</p>
     </div>
   </div>
 </footer>
+
+<!-- Initialize Lucide Icons -->
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
