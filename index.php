@@ -1,3 +1,4 @@
+<!-- Deploy: PHP Stack Migration Complete -->
 <?php
 $page_title = 'Triagem de Crédito Inteligente';
 include 'includes/header.php';
