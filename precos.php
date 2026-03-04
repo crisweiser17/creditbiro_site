@@ -2,16 +2,53 @@
 $page_title = 'Planos e Preços';
 include 'includes/header.php';
 
-$plans = [
-    ["name" => "Trial", "price" => "R$ 0", "credits" => "20 (único)", "costPerCredit" => "Grátis", "highlight" => false],
-    ["name" => "Pay As You Go", "price" => "R$ 0", "credits" => "Sob demanda", "costPerCredit" => "R$ 4,50", "highlight" => false],
-    ["name" => "Light", "price" => "R$ 147", "credits" => "40", "costPerCredit" => "R$ 3,68", "highlight" => false],
-    ["name" => "Starter", "price" => "R$ 297", "credits" => "100", "costPerCredit" => "R$ 2,97", "highlight" => true],
-    ["name" => "Growth", "price" => "R$ 597", "credits" => "250", "costPerCredit" => "R$ 2,39", "highlight" => true],
-    ["name" => "Business", "price" => "R$ 1.297", "credits" => "600", "costPerCredit" => "R$ 2,16", "highlight" => true],
-    ["name" => "Professional", "price" => "R$ 2.497", "credits" => "1.400", "costPerCredit" => "R$ 1,78", "highlight" => false],
-    ["name" => "Enterprise", "price" => "R$ 4.997", "credits" => "3.250", "costPerCredit" => "R$ 1,54", "highlight" => false],
+// Raw data for plans to allow calculations
+$raw_plans = [
+    ["name" => "Trial", "price" => 0, "credits" => 20, "highlight" => false, "custom" => true],
+    ["name" => "Pay As You Go", "price" => 0, "credits" => 0, "highlight" => false, "custom" => true],
+    ["name" => "Light", "price" => 147, "credits" => 40, "highlight" => false],
+    ["name" => "Starter", "price" => 297, "credits" => 100, "highlight" => true],
+    ["name" => "Growth", "price" => 597, "credits" => 250, "highlight" => true],
+    ["name" => "Business", "price" => 1297, "credits" => 600, "highlight" => true],
+    ["name" => "Professional", "price" => 2497, "credits" => 1400, "highlight" => false],
+    ["name" => "Enterprise", "price" => 4997, "credits" => 3250, "highlight" => false],
 ];
+
+// Helper to format currency
+function formatMoney($val) {
+    return 'R$ ' . number_format($val, 2, ',', '.');
+}
+
+// Calculate derived fields
+$plans = array_map(function($plan) {
+    // Default values
+    $plan['display_price'] = formatMoney($plan['price']);
+    $plan['display_credits'] = number_format($plan['credits'], 0, ',', '.');
+    $plan['cost_per_credit'] = '-';
+    $plan['additional_credit_cost'] = '-';
+
+    // Logic for standard monthly plans
+    if (!isset($plan['custom'])) {
+        $cost = $plan['price'] / $plan['credits'];
+        $plan['cost_per_credit'] = formatMoney($cost);
+        $plan['additional_credit_cost'] = formatMoney($cost * 1.60); // +60%
+    }
+    
+    // Specific overrides
+    if ($plan['name'] === 'Trial') {
+        $plan['display_credits'] = "20 (único)";
+        $plan['cost_per_credit'] = "Grátis";
+        $plan['additional_credit_cost'] = "-";
+    }
+    
+    if ($plan['name'] === 'Pay As You Go') {
+        $plan['display_credits'] = "Sob demanda";
+        $plan['cost_per_credit'] = "R$ 4,50";
+        $plan['additional_credit_cost'] = "-";
+    }
+
+    return $plan;
+}, $raw_plans);
 
 // Common features for all plans
 $plan_features = [
@@ -73,6 +110,7 @@ $plan_features = [
                         <th class="p-4 font-bold">Investimento Mensal</th>
                         <th class="p-4 font-bold">Créditos/Mês</th>
                         <th class="p-4 font-bold text-right">Custo por Crédito</th>
+                        <th class="p-4 font-bold text-right">Crédito Adicional (+60%)</th>
                         <th class="p-4 font-bold text-center">Ação</th>
                     </tr>
                 </thead>
@@ -87,9 +125,10 @@ $plan_features = [
                                     <span class="ml-2 text-xs bg-green-100 text-green-700 py-1 px-2 rounded-full font-bold">Grátis</span>
                                 <?php endif; ?>
                             </td>
-                            <td class="p-4 text-slate-700 font-medium"><?php echo $plan['price']; ?></td>
-                            <td class="p-4 text-slate-700"><?php echo $plan['credits']; ?></td>
-                            <td class="p-4 text-right font-mono text-slate-600"><?php echo $plan['costPerCredit']; ?></td>
+                            <td class="p-4 text-slate-700 font-medium"><?php echo $plan['display_price']; ?></td>
+                            <td class="p-4 text-slate-700"><?php echo $plan['display_credits']; ?></td>
+                            <td class="p-4 text-right font-mono text-slate-600 font-bold"><?php echo $plan['cost_per_credit']; ?></td>
+                            <td class="p-4 text-right font-mono text-slate-500"><?php echo $plan['additional_credit_cost']; ?></td>
                             <td class="p-4 text-center">
                                 <a href="<?php echo ($plan['name'] === 'Enterprise') ? '/contato.php' : 'https://app.creditbiro.com.br/register'; ?>" class="text-sm font-bold py-2 px-4 rounded-lg transition-colors inline-block <?php echo $plan['highlight'] ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'; ?>">
                                     <?php echo ($plan['name'] === 'Enterprise') ? 'Falar com Consultor' : 'Assinar'; ?>
@@ -104,6 +143,7 @@ $plan_features = [
         <div class="mt-8 text-sm text-slate-500 text-center">
             <p>* O plano Trial é limitado a um uso por CNPJ/CPF. Os créditos expiram em 30 dias.</p>
             <p>** Planos mensais possuem renovação automática. Cancele a qualquer momento.</p>
+            <p>*** O valor do crédito adicional é aplicado para consultas excedentes ao pacote contratado.</p>
         </div>
     </div>
 </section>

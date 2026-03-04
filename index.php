@@ -56,29 +56,45 @@ $plan_features = [
     "Buscas de processos judiciais"
 ];
 
-$plans = [
+// Helper to format currency
+function formatMoney($val) {
+    return 'R$ ' . number_format($val, 2, ',', '.');
+}
+
+$raw_plans = [
     [
         'title' => "Starter",
-        'price' => "R$ 297",
-        'credits' => "100",
+        'price' => 297,
+        'credits' => 100,
         'features' => $plan_features,
         'highlighted' => false
     ],
     [
         'title' => "Growth",
-        'price' => "R$ 597",
-        'credits' => "250",
+        'price' => 597,
+        'credits' => 250,
         'features' => $plan_features,
         'highlighted' => true
     ],
     [
         'title' => "Business",
-        'price' => "R$ 1.297",
-        'credits' => "600",
+        'price' => 1297,
+        'credits' => 600,
         'features' => $plan_features,
         'highlighted' => false
     ]
 ];
+
+$plans = array_map(function($plan) {
+    $plan['display_price'] = formatMoney($plan['price']);
+    $plan['display_credits'] = number_format($plan['credits'], 0, ',', '.');
+    
+    // Calculate cost per credit
+    $cost = $plan['price'] / $plan['credits'];
+    $plan['cost_per_credit'] = formatMoney($cost);
+    
+    return $plan;
+}, $raw_plans);
 ?>
 
 <!-- Hero Section -->
@@ -149,13 +165,16 @@ $plans = [
                     <?php endif; ?>
                     <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo $plan['title']; ?></h3>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold text-slate-900"><?php echo $plan['price']; ?></span>
+                        <span class="text-4xl font-bold text-slate-900"><?php echo $plan['display_price']; ?></span>
                         <span class="text-slate-500 text-sm">/mês</span>
                     </div>
                     
                     <div class="mb-6">
                         <p class="font-semibold text-slate-700 mb-1">Créditos inclusos:</p>
-                        <p class="text-2xl font-bold text-blue-600"><?php echo $plan['credits']; ?></p>
+                        <p class="text-2xl font-bold text-blue-600"><?php echo $plan['display_credits']; ?></p>
+                        <p class="text-xs text-slate-500 mt-1">
+                            (Sai a <strong><?php echo $plan['cost_per_credit']; ?></strong> por crédito)
+                        </p>
                     </div>
 
                     <ul class="space-y-3 mb-8 flex-1">
