@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Search, FileText, AlertTriangle, Globe, MapPin, Gavel, CheckCircle, Shield } from 'lucide-react';
+
+const solutions = [
+  {
+    title: "Consulta CNPJ (Receita Federal)",
+    description: "Acesse todos os dados cadastrais do CNPJ diretamente na base da Receita Federal. Verifique situação cadastral, atividade econômica (CNAE), quadro societário e capital social.",
+    icon: Shield
+  },
+  {
+    title: "Situação Cadastral CPF",
+    description: "Valide a situação cadastral do CPF na Receita Federal em tempo real. Essencial para prevenção de fraudes e validação de identidade.",
+    icon: Search
+  },
+  {
+    title: "Cheques sem Fundo (CCF)",
+    description: "Consulte o cadastro de emitentes de cheques sem fundo do Banco Central. Identifique histórico de inadimplência bancária.",
+    icon: FileText
+  },
+  {
+    title: "Protestos em Cartórios (CENPROT)",
+    description: "Varredura nacional em cartórios de protesto. Identifique títulos protestados em todo o Brasil, com detalhes do cartório e valor.",
+    icon: AlertTriangle
+  },
+  {
+    title: "SEFAZ / SINTEGRA",
+    description: "Verifique se o CNPJ está habilitado para emitir Notas Fiscais. Consulta essencial para cadastro de fornecedores e clientes PJ.",
+    icon: CheckCircle
+  },
+  {
+    title: "Processos Judiciais (Judit)",
+    description: "Busca abrangente de processos judiciais contra CPF ou CNPJ em diversos tribunais. Análise de risco jurídico completa.",
+    icon: Gavel
+  },
+  {
+    title: "Localização e Endereço",
+    description: "Enriqueça dados com busca de endereço via CEP, visualização no Google Maps e até foto da fachada do imóvel para confirmação visual.",
+    icon: MapPin
+  },
+  {
+    title: "Domínios .com.br",
+    description: "Descubra a titularidade de domínios nacionais. Veja data de criação e responsável (proprietário do site/email), útil para investigações digitais.",
+    icon: Globe
+  }
+];
+---
+
+<Layout title="Soluções de Triagem - CreditBiro">
+  <div class="bg-slate-900 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-4">Nossas Soluções de Consulta</h1>
+      <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+        Dados precisos de múltiplas fontes oficiais para sua análise de crédito e risco.
+      </p>
+    </div>
+  </div>
+
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-8">
+        {solutions.map(solution => (
+          <div class="flex gap-6 p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+            <div class="shrink-0">
+              <div class="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                <solution.icon className="w-7 h-7" />
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">{solution.title}</h3>
+              <p class="text-slate-600 leading-relaxed">
+                {solution.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center bg-blue-50 rounded-2xl p-8">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Precisa de uma solução personalizada?</h2>
+        <p class="text-slate-600 mb-6">
+          Nossa API permite integração direta com seu sistema. Fale com nossa equipe técnica.
+        </p>
+        <a href="/contato" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
+          Falar com Especialista
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
