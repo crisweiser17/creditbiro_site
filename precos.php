@@ -12,6 +12,16 @@ $plans = [
     ["name" => "Professional", "price" => "R$ 2.497", "credits" => "1.400", "costPerCredit" => "R$ 1,78", "highlight" => false],
     ["name" => "Enterprise", "price" => "R$ 4.997", "credits" => "3.250", "costPerCredit" => "R$ 1,54", "highlight" => false],
 ];
+
+// Common features for all plans
+$plan_features = [
+    "Consultas Básicas e Completas de CPF/CNPJ",
+    "Cheques sem fundo",
+    "Protestos",
+    "Titularidade de domínios/emails",
+    "Busca endereço, Ref. Comerciais",
+    "Buscas de processos judiciais"
+];
 ?>
 
 <div class="bg-slate-900 text-white py-20">
@@ -26,6 +36,24 @@ $plans = [
 <section class="py-16">
     <div class="container mx-auto px-4">
       
+        <!-- Features Included Section -->
+        <div class="mb-16 text-center">
+            <h2 class="text-2xl font-bold text-slate-900 mb-8">O que está incluso em todos os planos?</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto text-left">
+                <?php foreach ($plan_features as $feature): ?>
+                    <div class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                        <div class="bg-green-100 text-green-600 p-2 rounded-full shrink-0">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-slate-700 font-medium"><?php echo $feature; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <p class="mt-6 text-slate-500 text-sm">
+                * Todos os planos consomem créditos. A diferença está no preço do crédito e volume mensal.
+            </p>
+        </div>
+
         <!-- Call out for Trial -->
         <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-12 text-center max-w-3xl mx-auto">
             <h3 class="text-xl font-bold text-blue-800 mb-2">Novo na CreditBiro?</h3>

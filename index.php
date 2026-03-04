@@ -46,26 +46,36 @@ $features = [
     ]
 ];
 
+// Common features for all plans
+$plan_features = [
+    "Consultas Básicas e Completas de CPF/CNPJ",
+    "Cheques sem fundo",
+    "Protestos",
+    "Titularidade de domínios/emails",
+    "Busca endereço, Ref. Comerciais",
+    "Buscas de processos judiciais"
+];
+
 $plans = [
     [
         'title' => "Starter",
         'price' => "R$ 297",
         'credits' => "100",
-        'features' => ["Consultas CPF/CNPJ", "Cheques sem fundo", "Protestos", "Suporte por email"],
+        'features' => $plan_features,
         'highlighted' => false
     ],
     [
         'title' => "Growth",
         'price' => "R$ 597",
         'credits' => "250",
-        'features' => ["Tudo do Starter", "Localização Avançada", "Judit (Processos)", "Suporte Prioritário"],
+        'features' => $plan_features,
         'highlighted' => true
     ],
     [
         'title' => "Business",
         'price' => "R$ 1.297",
         'credits' => "600",
-        'features' => ["Tudo do Growth", "API de Integração", "Múltiplos Usuários", "Gerente de Conta"],
+        'features' => $plan_features,
         'highlighted' => false
     ]
 ];
