@@ -108,10 +108,10 @@ $plans = array_map(function($plan) {
             Potencialize sua análise de risco com dados precisos de CPF, CNPJ, Protestos e Processos Judiciais.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/precos.php" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all shadow-lg hover:shadow-blue-500/30">
+            <a href="/precos" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all shadow-lg hover:shadow-blue-500/30">
                 Ver Planos e Preços
             </a>
-            <a href="/contato.php" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all border border-slate-700">
+            <a href="/contato" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all border border-slate-700">
                 Falar com Consultor
             </a>
         </div>
@@ -186,7 +186,7 @@ $plans = array_map(function($plan) {
                         <?php endforeach; ?>
                     </ul>
 
-                    <a href="/contato.php" class="block w-full text-center py-3 px-4 rounded-lg font-bold transition-colors <?php echo $plan['highlighted'] ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'; ?>">
+                    <a href="/contato" class="block w-full text-center py-3 px-4 rounded-lg font-bold transition-colors <?php echo $plan['highlighted'] ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'; ?>">
                         Começar Agora
                     </a>
                 </div>
@@ -206,7 +206,7 @@ $plans = array_map(function($plan) {
         </div>
         
         <div class="text-center mt-8">
-            <a href="/precos.php" class="text-slate-600 hover:text-blue-600 text-sm font-medium">
+            <a href="/precos" class="text-slate-600 hover:text-blue-600 text-sm font-medium">
                 Ver tabela completa de planos (Enterprise, Light, etc) &rarr;
             </a>
         </div>

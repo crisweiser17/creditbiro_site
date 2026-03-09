@@ -121,7 +121,7 @@ $plan_features = [
                             <td class="p-4 text-right font-mono text-slate-600 font-bold"><?php echo $plan['cost_per_credit']; ?></td>
                             <td class="p-4 text-right font-mono text-slate-500"><?php echo $plan['additional_credit_cost']; ?></td>
                             <td class="p-4 text-center">
-                                <a href="<?php echo ($plan['name'] === 'Enterprise') ? '/contato.php' : 'https://app.creditbiro.com.br/register'; ?>" class="text-sm font-bold py-2 px-4 rounded-lg transition-colors inline-block <?php echo $plan['highlight'] ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'; ?>">
+                                <a href="<?php echo ($plan['name'] === 'Enterprise') ? '/contato' : 'https://app.creditbiro.com.br/register'; ?>" class="text-sm font-bold py-2 px-4 rounded-lg transition-colors inline-block <?php echo $plan['highlight'] ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-200 text-slate-700 hover:bg-slate-300'; ?>">
                                     <?php echo ($plan['name'] === 'Enterprise') ? 'Falar com Consultor' : 'Assinar'; ?>
                                 </a>
                             </td>

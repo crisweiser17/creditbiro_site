@@ -26,10 +26,10 @@ $currentYear = date('Y');
       <div>
         <h4 class="text-white font-bold mb-4">Empresa</h4>
         <ul class="space-y-2 text-sm">
-          <li><a href="/precos.php" class="hover:text-white">Planos e Preços</a></li>
-          <li><a href="/contato.php" class="hover:text-white">Fale Conosco</a></li>
-          <li><a href="#" class="hover:text-white">Termos de Uso</a></li>
-          <li><a href="#" class="hover:text-white">Privacidade</a></li>
+          <li><a href="/precos" class="hover:text-white">Planos e Preços</a></li>
+          <li><a href="/contato" class="hover:text-white">Fale Conosco</a></li>
+          <li><a href="/termos" class="hover:text-white">Termos de Uso</a></li>
+          <li><a href="/privacidade" class="hover:text-white">Privacidade</a></li>
         </ul>
       </div>
 

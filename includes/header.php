@@ -3,8 +3,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 $links = [
     '/' => 'Home',
     '/#solucoes' => 'Soluções',
-    '/precos.php' => 'Preços',
-    '/contato.php' => 'Contato',
+    '/precos' => 'Preços',
+    '/contato' => 'Contato',
 ];
 ?>
 <!DOCTYPE html>
@@ -50,6 +50,11 @@ $links = [
         <!-- Desktop Nav -->
         <nav class="hidden md:flex gap-8">
             <?php foreach ($links as $href => $label): ?>
+                <?php
+                    // Remove .php extension for display
+                    $href = str_replace('.php', '', $href);
+                    if ($href == '/index') $href = '/';
+                ?>
                 <a href="<?php echo $href; ?>" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">
                     <?php echo $label; ?>
                 </a>
@@ -60,7 +65,7 @@ $links = [
             <a href="https://app.creditbiro.com.br/login" class="text-slate-600 hover:text-blue-600 font-medium">
                 Login
             </a>
-            <a href="/precos.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+            <a href="/precos" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                 Começar Grátis
             </a>
         </div>
@@ -77,6 +82,11 @@ $links = [
          x-transition
          class="md:hidden bg-white border-t border-slate-200 absolute w-full left-0 top-16 shadow-lg py-4 px-4 flex flex-col gap-4">
         <?php foreach ($links as $href => $label): ?>
+            <?php
+                // Remove .php extension for display
+                $href = str_replace('.php', '', $href);
+                if ($href == '/index') $href = '/';
+            ?>
             <a href="<?php echo $href; ?>" class="text-slate-600 hover:text-blue-600 font-medium block">
                 <?php echo $label; ?>
             </a>
@@ -85,7 +95,7 @@ $links = [
         <a href="https://app.creditbiro.com.br/login" class="text-slate-600 hover:text-blue-600 font-medium block">
             Login
         </a>
-        <a href="/precos.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-center block">
+        <a href="/precos" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-center block">
             Começar Grátis
         </a>
     </div>
