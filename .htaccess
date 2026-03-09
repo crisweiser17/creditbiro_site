@@ -1,18 +1,15 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
+RewriteEngine On
 
-    # Force HTTPS (Prevent loops behind proxies like Nginx/Cloudflare)
-    RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteCond %{HTTPS} off
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# 1. Force HTTPS
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Remove .php extension from URL (Redirect external requests)
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
-    RewriteRule ^ %1 [R=301,L]
+# 2. Remove .php extension (Redirect external request /file.php to /file)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
 
-    # Internally rewrite extensionless URLs to .php (Handle internal processing)
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^(.*)$ $1.php [L]
-</IfModule>
+# 3. Handle extensionless URLs (Internally rewrite /file to /file.php)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
