@@ -306,7 +306,7 @@
           </div> 
         </div> 
 
-        <a href="https://app.creditbiro.com.br/register" class="btn">Começar Agora</a> 
+        <a href="https://app.creditbiro.com.br/register?planid=3" class="btn">Começar Agora</a> 
       </article> 
 
       <article class="card featured" data-plan="growth"> 
@@ -327,7 +327,7 @@
           </div> 
         </div> 
 
-        <a href="https://app.creditbiro.com.br/register" class="btn">Começar Agora</a> 
+        <a href="https://app.creditbiro.com.br/register?planid=4" class="btn">Começar Agora</a> 
       </article> 
 
       <article class="card" data-plan="business"> 
@@ -347,7 +347,7 @@
           </div> 
         </div> 
 
-        <a href="https://app.creditbiro.com.br/register" class="btn">Começar Agora</a> 
+        <a href="https://app.creditbiro.com.br/register?planid=5" class="btn">Começar Agora</a> 
       </article> 
 
       <article class="card" data-plan="enterprise"> 
@@ -367,7 +367,7 @@
           </div> 
         </div> 
 
-        <a href="https://app.creditbiro.com.br/register" class="btn">Começar Agora</a> 
+        <a href="https://app.creditbiro.com.br/register?planid=7" class="btn">Começar Agora</a> 
       </article> 
     </div> 
 
