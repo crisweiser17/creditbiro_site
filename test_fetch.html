@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Fetch</title>
+</head>
+<body>
+    <h1>Test Fetch to send_contact.php</h1>
+    <button id="testBtn">Test Fetch</button>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('testBtn').addEventListener('click', () => {
+            const formData = new FormData();
+            formData.append('name', 'Test User');
+            formData.append('email', 'test@example.com');
+            formData.append('subject', 'Test Subject');
+            formData.append('message', 'This is a test message.');
+
+            fetch('/send_contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const text = await response.text();
+                document.getElementById('output').textContent = 'Status: ' + response.status + '\nResponse: ' + text;
+                try {
+                    const json = JSON.parse(text);
+                    console.log('JSON:', json);
+                } catch (e) {
+                    console.error('Invalid JSON:', e);
+                }
+            })
+            .catch(error => {
+                document.getElementById('output').textContent = 'Error: ' + error.message;
+                console.error('Fetch error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

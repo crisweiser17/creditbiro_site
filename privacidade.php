@@ -64,7 +64,7 @@ include 'includes/header.php';
 
             <h2 class="text-2xl font-bold text-slate-900 mt-8 mb-4">7. Alterações nesta Política</h2>
             <p class="mb-6">
-                Podemos atualizar esta política periodicamente. A versão mais recente estará sempre disponível nesta página, com a data da última atualização.
+                Podemos atualizar esta política periodicamente. A versão mais recente estará sempre disponível nesta página, com a data da última atualização. A CreditBiro é operada pela <strong>TB TECH SPE LTDA</strong>, inscrita no <strong>CNPJ 64.089.707/0001-07</strong>.
             </p>
 
             <hr class="border-slate-200 my-8">

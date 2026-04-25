@@ -261,6 +261,13 @@ $raw_plans = [
     ]
 ];
 
+// Aplica 10% de desconto para Mentorados Tigre Branco APENAS nos custos das consultas (Triagem e Completa) - Franquia (price) e Créditos se mantém
+$raw_plans = array_map(function($plan) {
+    // Retiramos o desconto do price ($plan['price'] = $plan['price'] * 0.90) para manter a franquia original.
+    // O desconto dos custos já é tratado no select da calculadora e no arquivo JS da tabela de planos
+    return $plan;
+}, $raw_plans);
+
 $plans = array_map(function($plan) {
     $plan['display_price'] = formatMoney($plan['price']);
     $plan['display_credits'] = number_format($plan['credits'], 0, ',', '.');
@@ -271,8 +278,8 @@ $plans = array_map(function($plan) {
 $example_leads = 500;
 $example_rejection_rate = 0.70;
 $example_market_cost = 15;
-$triage_cost = 3.03;
-$full_total_cost = 7.52;
+$triage_cost = 2.73;
+$full_total_cost = 6.77;
 $additional_cost = $full_total_cost - $triage_cost;
 $example_approved = $example_leads * (1 - $example_rejection_rate);
 $example_current_cost = $example_leads * $example_market_cost;
@@ -305,6 +312,14 @@ $example_final_cost_per_approved = $full_total_cost;
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 
             Economize até 80% vs. birôs tradicionais 
         </div> 
+
+        <!-- Discount Badge -->
+        <div class="inline-flex flex-col items-center gap-1 mt-2 mb-4 animate-fadeDown [animation-delay:50ms]">
+            <div class="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-orange-500/20 border border-orange-500/40 text-lg md:text-xl font-extrabold text-orange-400 tracking-wide shadow-[0_0_20px_rgba(249,115,22,0.3)]"> 
+                🔥 Mentorados Tigre Branco têm 10% de desconto adicional!
+            </div> 
+            <span class="text-slate-400/80 text-sm font-medium">*Os valores simulados abaixo já estão com o desconto aplicado</span>
+        </div>
 
         <!-- Headline --> 
         <h1 class="text-[clamp(2.2rem,5.5vw,3.6rem)] font-extrabold leading-[1.12] tracking-tight animate-fadeUp [animation-delay:100ms]">
@@ -342,18 +357,18 @@ $example_final_cost_per_approved = $full_total_cost;
 
             <div class="bg-white/5 border border-white/10 rounded-xl p-5 relative z-10 backdrop-blur-sm transition-all hover:bg-white/10">
                 <div class="text-blue-400 text-sm font-semibold mb-1">Etapa 1</div>
-                <div class="font-bold text-lg text-slate-100">Triagem inicial por até R$ 2,71</div>
+                <div class="font-bold text-lg text-slate-100">Triagem inicial por até R$ 2,73</div>
                 <p class="text-slate-400 text-sm mt-2">Faça uma análise objetiva e filtre rapidamente os casos com menor potencial antes de avançar.</p>
             </div>
             <div class="bg-white/5 border border-white/10 rounded-xl p-5 relative z-10 backdrop-blur-sm transition-all hover:bg-white/10">
                 <div class="text-blue-400 text-sm font-semibold mb-1">Etapa 2</div>
-                <div class="font-bold text-lg text-slate-100">Consulta completa por até + R$ 4,02</div>
+                <div class="font-bold text-lg text-slate-100">Consulta completa por até + R$ 4,04</div>
                 <p class="text-slate-400 text-sm mt-2">Aprofunde a avaliação apenas dos leads que passaram na primeira etapa.</p>
             </div>
             <div class="bg-white/5 border border-white/10 rounded-xl p-5 relative z-10 backdrop-blur-sm transition-all hover:bg-white/10">
                 <div class="text-blue-400 text-sm font-semibold mb-1">Resultado</div>
                 <div class="font-bold text-lg text-slate-100">Mais eficiência com menor custo por aprovação</div>
-                <p class="text-slate-400 text-sm mt-2">Sua operação concentra investimento nos casos que realmente merecem, custando no máximo <strong class="text-slate-200">R$ 6,73</strong>.</p>
+                <p class="text-slate-400 text-sm mt-2">Sua operação concentra investimento nos casos que realmente merecem, custando no máximo <strong class="text-slate-200">R$ 6,77</strong>.</p>
             </div>
         </div>
     </div>
@@ -522,7 +537,7 @@ $example_final_cost_per_approved = $full_total_cost;
             <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm relative z-10">
                 <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg mb-4">1</div>
                 <h3 class="text-xl font-bold text-slate-900 mb-2">Rode a Triagem</h3>
-                <p class="text-slate-600">Analise CPF ou CNPJ por até <strong>R$ 3,03</strong> para identificar rapidamente quem deve sair da esteira.</p>
+                <p class="text-slate-600">Analise CPF ou CNPJ por até <strong>R$ 2,73</strong> para identificar rapidamente quem deve sair da esteira.</p>
             </div>
             <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm relative z-10">
                 <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg mb-4">2</div>
@@ -630,10 +645,10 @@ $example_final_cost_per_approved = $full_total_cost;
                             <div>
                                 <label for="homePrecoCreditBiro" class="block text-sm font-semibold text-slate-200 mb-2">Selecione o Plano (Anual)</label>
                                 <select id="homePrecoCreditBiro" class="w-full px-4 py-3 rounded-xl bg-white text-slate-900 border border-white/20 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-colors" onchange="atualizarPrecoExibicao(); calcularHome()">
-                                    <option value='{"triagem":3.19, "completa":7.92, "franquia":399, "nome":"Starter"}'>Starter (Fidelidade 12 meses)</option>
-                                    <option value='{"triagem":3.03, "completa":7.52, "franquia":799, "nome":"Growth"}' selected>Growth (Fidelidade 12 meses)</option>
-                                    <option value='{"triagem":2.87, "completa":7.13, "franquia":1299, "nome":"Business"}'>Business (Fidelidade 12 meses)</option>
-                                    <option value='{"triagem":2.71, "completa":6.73, "franquia":2499, "nome":"Enterprise"}'>Enterprise (Fidelidade 12 meses)</option>
+                                    <option value='{"triagem":2.87, "completa":7.13, "franquia":399, "nome":"Starter"}'>Starter (Fidelidade 12 meses)</option>
+                                    <option value='{"triagem":2.73, "completa":6.77, "franquia":799, "nome":"Growth"}' selected>Growth (Fidelidade 12 meses)</option>
+                                    <option value='{"triagem":2.58, "completa":6.42, "franquia":1299, "nome":"Business"}'>Business (Fidelidade 12 meses)</option>
+                                    <option value='{"triagem":2.44, "completa":6.06, "franquia":2499, "nome":"Enterprise"}'>Enterprise (Fidelidade 12 meses)</option>
                                 </select>
                             </div>
                         </div>
@@ -986,8 +1001,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateExample(leads, btnElement) {
     const rejectionRate = 0.70;
     const marketCost = 15;
-    const triageCost = 3.03;
-    const fullCost = 7.52;
+    const triageCost = 2.73;
+    const fullCost = 6.77;
     const additionalCost = fullCost - triageCost;
     
     const approved = Math.round(leads * (1 - rejectionRate));

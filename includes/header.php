@@ -3,7 +3,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 $links = [
     '/' => 'Home',
     '/#solucoes' => 'Soluções',
-    '/precos' => 'Preços',
+    '/#calculadora-home' => 'Calculadora',
+    '/#planos' => 'Preços',
     '/contato' => 'Contato',
 ];
 ?>
@@ -12,8 +13,22 @@ $links = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CreditBiro - Triagem de Crédito e Consultas CPF/CNPJ">
+    <meta name="description" content="<?php echo isset($page_description) ? $page_description : 'CreditBiro - Triagem de Crédito e Consultas CPF/CNPJ'; ?>">
     <title><?php echo isset($page_title) ? $page_title . ' - CreditBiro' : 'CreditBiro'; ?></title>
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo 'https://' . ($_SERVER['HTTP_HOST'] ?? 'creditbiro.com.br') . ($_SERVER['REQUEST_URI'] ?? '/'); ?>">
+    <meta property="og:title" content="<?php echo isset($page_title) ? $page_title . ' - CreditBiro' : 'CreditBiro'; ?>">
+    <meta property="og:description" content="<?php echo isset($page_description) ? $page_description : 'CreditBiro - Triagem de Crédito e Consultas CPF/CNPJ'; ?>">
+    <meta property="og:image" content="<?php echo isset($page_image) ? $page_image : 'https://' . ($_SERVER['HTTP_HOST'] ?? 'creditbiro.com.br') . '/assets/img/og-image.jpg'; ?>">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="<?php echo 'https://' . ($_SERVER['HTTP_HOST'] ?? 'creditbiro.com.br') . ($_SERVER['REQUEST_URI'] ?? '/'); ?>">
+    <meta property="twitter:title" content="<?php echo isset($page_title) ? $page_title . ' - CreditBiro' : 'CreditBiro'; ?>">
+    <meta property="twitter:description" content="<?php echo isset($page_description) ? $page_description : 'CreditBiro - Triagem de Crédito e Consultas CPF/CNPJ'; ?>">
+    <meta property="twitter:image" content="<?php echo isset($page_image) ? $page_image : 'https://' . ($_SERVER['HTTP_HOST'] ?? 'creditbiro.com.br') . '/assets/img/og-image.jpg'; ?>">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,15 +51,16 @@ $links = [
     
     <!-- Icons (Lucide via unpkg - simpler than react-lucide for PHP) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased flex flex-col min-h-screen">
 
 <header class="bg-white border-b border-slate-200 sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
     <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="/" class="text-2xl font-bold text-blue-600 flex items-center gap-2">
-            <!-- Simple SVG Logo Placeholder -->
-            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
-            CreditBiro
+        <a href="/" class="flex items-center gap-2">
+            <img src="/assets/img/logo.png" alt="CreditBiro" class="h-10 w-auto">
         </a>
 
         <!-- Desktop Nav -->
@@ -65,8 +81,8 @@ $links = [
             <a href="https://app.creditbiro.com.br/login" class="text-slate-600 hover:text-blue-600 font-medium">
                 Login
             </a>
-            <a href="/precos" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                Começar Grátis
+            <a href="https://app.creditbiro.com.br/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                Começar Agora
             </a>
         </div>
 
@@ -95,8 +111,8 @@ $links = [
         <a href="https://app.creditbiro.com.br/login" class="text-slate-600 hover:text-blue-600 font-medium block">
             Login
         </a>
-        <a href="/precos" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-center block">
-            Começar Grátis
+        <a href="https://app.creditbiro.com.br/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-center block">
+            Começar Agora
         </a>
     </div>
 </header>
